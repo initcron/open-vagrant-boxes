@@ -18,3 +18,9 @@ mv /tmp/vagrant /etc/sudoers.d/
 
 # Install NFS client
 apt-get -y install nfs-common
+
+#Install some additional useful packages
+apt-get install -y git curl wget python-yaml libssl-dev
+
+# Set Locale
+locale-gen en_US.UTF-8

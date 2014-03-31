@@ -17,7 +17,7 @@ task "virtualbox:all" => ["virtualbox:build_image", "virtualbox:fixup_image",
 
 desc "Build VirtualBox image"
 task "virtualbox:build_image" do
-	sh "bundle exec veewee vbox build ubuntu-12.04.3-amd64-vbox --force --auto"
+	sh "bundle exec veewee vbox build ubuntu-12.04.3-amd64-vbox --force --auto --nogui"
 	sh "bundle exec veewee vbox ssh ubuntu-12.04.3-amd64-vbox 'sudo poweroff'"
 	puts "Sleeping a few seconds, waiting for the VM to power off."
 	sh "sleep 30"
@@ -27,7 +27,7 @@ desc "Fix up VirtualBox Guest Additions inside the VM"
 task "virtualbox:fixup_image" do
 	# After building the box, the kernel has been upgraded. We boot into
 	# the new kernel to install VirtualBox Guest Additions.
-	sh "bundle exec veewee vbox up ubuntu-12.04.3-amd64-vbox"
+	sh "bundle exec veewee vbox up ubuntu-12.04.3-amd64-vbox --nogui"
 	sh "sleep 10"
 	sh "chmod 600 vagrant_insecure.key"
 	command = "cd /home/vagrant && " +
